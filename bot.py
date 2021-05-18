@@ -1,6 +1,7 @@
 import os
 import discord
 from dotenv import load_dotenv
+from replit import db
 
 from discord.ext import commands
 
