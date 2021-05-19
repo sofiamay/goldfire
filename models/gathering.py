@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
-from topic import Topic
+from topics import Topics
 from user import User
 
 # Gathering Model
 # gathering_data = {
+#     'name': 'Julie\'s Gathering',
 #     'date_time': datetime.now(),
 #     'total_seats': 4,
 #     'time_per_topic': 3,
@@ -16,8 +17,11 @@ from user import User
 
 class Gathering:
     def __init__(self, dict):
-        self.datetime = (
-            dict.get('date_time') or datetime.now() + timedelta(days=1))
+        self.name = dict.get('name') or 'An Unnamed Gathering',
+        if 'date_time' in dict:
+            self.date_time = datetime.fromfromisoformat(dict['date_time'])
+        else:
+            self.date_time = datetime.now() + timedelta(days=1)
         total_seats = dict.get('total_seats') or 4
         self.total_seats = total_seats
         self.time_per_topic = dict.get('time_per_topic') or 3
@@ -25,13 +29,14 @@ class Gathering:
         # Topics
         self.number_of_topics = number_of_topics
         if 'topics' in dict:
-            topics = set(
-                [Topic.fromJSON(string) for string in dict['topics']]
-            )
+            topics = set(dict['topics'])
             if len(topics) > number_of_topics:
                 raise IndexError(
                     'There are more topics listed than the number of topics'
                 )
+            for topic in topics:
+                if not Topics.isValid(topic):
+                    raise ValueError('{topic} is not a valid topic')
             self.topics = topics
         else:
             self.topics = set()
@@ -39,7 +44,7 @@ class Gathering:
         if 'users' in dict:
             self.users = [User(userdict) for userdict in dict['users']]
         else:
-            self.users = set()
+            self.users = []
         # Properties
         self.available_seats = total_seats
 
@@ -53,4 +58,12 @@ class Gathering:
 
     # TO DO
     def toJSON(self):
-        return
+        return {
+            'name': self.name,
+            'date_time': self.date_time.isoformat(),
+            'total_seats': self.total_seats,
+            'time_per_topic': self.time_per_topic,
+            'number_of_topics': self.number_of_topics,
+            'topics': list(self.topics),
+            'users': [user.toJSON() for user in self.users]
+        }
