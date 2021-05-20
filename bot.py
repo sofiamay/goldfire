@@ -1,5 +1,5 @@
 import os
-import discord
+# import discord
 from dotenv import load_dotenv
 from replit import db
 
@@ -15,11 +15,6 @@ GUILD = os.getenv('DISCORD_GUILD')
 # client = discord.Client(intents=intents)
 
 bot = commands.Bot(command_prefix='!')
-
-
-@bot.event
-async def on_ready():
-    print(f'{client.user.name} has connected to Discord!')
 
 
 @bot.event
