@@ -5,8 +5,8 @@
 
 class Topics:
     _topic_list = [
-        'intro', 'kindness', 'discovery', 'joy', 'shared_resource',
-        'shadow_challenge', 'heroic', 'action'
+        'intro', 'kindness', 'discovery', 'joy', 'shared resource',
+        'shadow challenge', 'heroic', 'action'
     ]
 
     @classmethod
