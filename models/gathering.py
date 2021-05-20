@@ -11,7 +11,8 @@ from user import User
 #     'number_of_topics': 3,
 #     'topics': ['kindess', 'heroic', 'action'], -> to set
 #     'users': [User.toJSON(), User.toJSON],
-#       'available_seats': 2, # property
+#     'available_seats': 2, # property
+#     'open': True #property
 # }
 
 
@@ -46,15 +47,15 @@ class Gathering:
         else:
             self.users = []
         # Properties
-        self.available_seats = total_seats
+        self._available_seats = total_seats
 
     @property
     def available_seats(self):
+        self._available_seats = self.total_seats - len(self.users)
         return self._available_seats
 
-    @available_seats.setter
-    def available_seats(self):
-        return self.total_seats - len(self.users)
+    def isOpen(self):
+        return True if len(self.users) < self.total_seats else False
 
     def toJSON(self):
         return {
