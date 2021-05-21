@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from topics import Topics
-from user import User
+from .topics import Topics
+from .user import User
 
 # Gathering Model
 # gathering_data = {

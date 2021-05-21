@@ -1,1 +1,1 @@
-from gathering import Gathering
+from .gathering import Gathering
