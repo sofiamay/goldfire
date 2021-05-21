@@ -5,7 +5,7 @@ from replit import db
 from discord.ext import commands
 
 # Models
-from gathering import Gathering
+from models import Gathering
 
 # Not needed for repl.it
 # from dotenv import load_dotenv
