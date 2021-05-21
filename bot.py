@@ -5,6 +5,9 @@ from replit import db
 
 from discord.ext import commands
 
+# Models
+from gathering import Gathering
+
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -23,6 +26,12 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.command(name='list', help='list all gatherings')
 async def list_gatherings(ctx):
-    return
+    if len(db['gatherings']) == 0:
+        await ctx.send('no gatherings listed')
+    else:
+        gatherings = [
+            Gathering(gathering_data) for gathering_data in db['gatherings']
+        ]
+        await ctx.send('\n'.join(gatherings))
 
 bot.run(TOKEN)
