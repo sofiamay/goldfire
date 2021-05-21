@@ -12,7 +12,6 @@ from user import User
 #     'topics': ['kindess', 'heroic', 'action'], -> to set
 #     'users': [User.toJSON(), User.toJSON],
 #     'available_seats': 2, # property
-#     'open': True #property
 # }
 
 
@@ -78,7 +77,8 @@ class Gathering:
             'time_per_topic': self.time_per_topic,
             'number_of_topics': self.number_of_topics,
             'topics': ', '.join(self.topics),
-            'users': ', '.join(self.users)
+            'users': ', '.join(self.users),
+            'status': 'open' if self.isOpen() else False
         }
         return """{name}:
         \tStart time - {start_time}
@@ -87,4 +87,5 @@ class Gathering:
         \tTime Per topic - {time_per_topic}
         \tNumber of topicss - {number_of_topics}
         \tTopics - {topics}
-        \tMembers joined: - {users}""".format(**args)
+        \tMembers joined - {users}
+        \tStatus - {status}""".format(**args)
