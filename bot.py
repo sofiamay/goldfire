@@ -14,14 +14,15 @@ GUILD = os.getenv('DISCORD_GUILD')
 # intents = discord.Intents.all()
 # client = discord.Client(intents=intents)
 
+# initialize gatherings
+if 'gatherings' not in db:
+    db['gatherings'] = []
+
 bot = commands.Bot(command_prefix='!')
 
 
-@bot.event
-async def on_member_join(member):
-    await member.create_dm()
-    await member.dm_channel.send(
-        f'Hi {member.name}, welcome to the Goldfire server!'
-    )
+@bot.command(name='list', help='list all gatherings')
+async def list_gatherings(ctx):
+    return
 
 bot.run(TOKEN)
