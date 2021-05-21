@@ -1,6 +1,5 @@
 import os
 # import discord
-from dotenv import load_dotenv
 from replit import db
 
 from discord.ext import commands
@@ -8,8 +7,10 @@ from discord.ext import commands
 # Models
 from gathering import Gathering
 
+# Not needed for repl.it
+# from dotenv import load_dotenv
+# load_dotenv()
 
-load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
