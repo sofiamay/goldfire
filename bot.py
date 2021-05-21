@@ -30,7 +30,7 @@ async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
 
-@bot.command(name='list', help='list all gatherings')
+@bot.command(name='list', help='Lists all gatherings')
 async def list_gatherings(ctx):
     if len(db['gatherings']) == 0:
         await ctx.send('There are no Circles scheduled')
