@@ -25,6 +25,11 @@ if 'gatherings' not in db:
 bot = commands.Bot(command_prefix='!')
 
 
+@bot.event
+async def on_ready():
+    print(f'{bot.user.name} has connected to Discord!')
+
+
 @bot.command(name='list', help='list all gatherings')
 async def list_gatherings(ctx):
     if len(db['gatherings']) == 0:
