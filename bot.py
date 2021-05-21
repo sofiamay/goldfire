@@ -33,7 +33,7 @@ async def on_ready():
 @bot.command(name='list', help='list all gatherings')
 async def list_gatherings(ctx):
     if len(db['gatherings']) == 0:
-        await ctx.send('no gatherings listed')
+        await ctx.send('There are no Circles scheduled')
     else:
         gatherings = [
             Gathering(gathering_data) for gathering_data in db['gatherings']
