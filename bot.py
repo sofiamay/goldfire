@@ -54,7 +54,7 @@ async def on_ready():
 
 @bot.command(name='list', help='Lists all Circles')
 async def list_gatherings(ctx):
-    bot.list_gatherings(ctx)
+    await bot.list_gatherings(ctx)
     # if len(db['gatherings']) == 0:
     #     await ctx.send('There are no Circles scheduled')
     # else:
