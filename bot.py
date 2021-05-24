@@ -72,8 +72,8 @@ async def create_gathering(ctx):
 
     await ctx.send('Type a name for your Circle:')
     msg = await bot.wait_for('message', check=check)
-    if Gathering.isValidName(msg):
-        name = msg
+    if Gathering.isValidName(msg.context):
+        name = msg.content
         await ctx.send(f'Circle name: {name}')
 
 bot.run(TOKEN)
