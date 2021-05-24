@@ -89,3 +89,10 @@ class Gathering:
         \tTopics - {topics}
         \tMembers joined - {users}
         \tStatus - {status}""".format(**args)
+
+    @staticmethod
+    def isValidName(name):
+        if len(name) > 30:
+            raise ValueError("Name must be less than 30 characters")
+        else:
+            return True

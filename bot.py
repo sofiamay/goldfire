@@ -55,32 +55,25 @@ async def on_ready():
 @bot.command(name='list', help='Lists all Circles')
 async def list_gatherings(ctx):
     await bot.list_gatherings(ctx)
-    # if len(db['gatherings']) == 0:
-    #     await ctx.send('There are no Circles scheduled')
-    # else:
-    #     gatherings = [
-    #         Gathering(gathering_data) for gathering_data in db['gatherings']
-    #     ]
-    #     await ctx.send('\n'.join(gatherings))
 
 
 @bot.command(name='list open', help='Lists circles with availability')
 async def list_open_gatherings(ctx):
-    if len(db['gatherings']) == 0:
-        await ctx.send('There are no Circles scheduled')
-    else:
-        all_gatherings = [
-            Gathering(gathering_data) for gathering_data in db['gatherings']
-        ]
-        available_gatherings = list(
-            filter(lambda gathering: (gathering.isOpen()), all_gatherings)
-        )
-        await ctx.send('\n'.join(available_gatherings))
+    await bot.list_gatherings(ctx, only_open=True)
 
 
 @bot.command(name='create', help='Create a new Circle')
 async def create_gathering(ctx):
-    # await list_open_gatherings(ctx)
-    await ctx.send('testing')
+    def check(message):
+        if (message.author == ctx.author) and (message.channel == ctx.channel):
+            return True
+        else:
+            return False
+
+    await ctx.send('Type a name for your Circle:')
+    msg = await bot.wait_for('message', check=check)
+    if Gathering.isValidName(msg):
+        name = msg
+        await ctx.send(f'Circle name: {name}')
 
 bot.run(TOKEN)
