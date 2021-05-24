@@ -57,7 +57,7 @@ async def list_open_gatherings(ctx):
 
 @bot.command(name='create', help='Create a new Circle')
 async def create_gathering(ctx):
-    await list_open_gatherings()
+    await list_open_gatherings(ctx)
     await ctx.send('testing')
 
 bot.run(TOKEN)
