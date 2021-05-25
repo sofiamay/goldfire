@@ -96,3 +96,7 @@ class Gathering:
             raise ValueError("Name must be less than 30 characters")
         else:
             return True
+
+    @staticmethod
+    def formatDate(date_string):
+        return datetime.strptime(date_string, '%m-%d-%Y %H:%M')

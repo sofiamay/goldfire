@@ -69,11 +69,13 @@ async def create_gathering(ctx):
             return True
         else:
             return False
-
+    data = {}
     await ctx.send('Type a name for your Circle:')
     msg = await bot.wait_for('message', check=check)
     if Gathering.isValidName(msg.content):
-        name = msg.content
-        await ctx.send(f'Circle name: {name}')
+        data['name'] = msg.content
+    await ctx.send(f'Choose a date and time in the format MM-DD-YYYY HH:MM')
+    msg = await bot.wait_for('message', check=check)
+    data['date_time'] = Gathering.formatDate(msg.content)
 
 bot.run(TOKEN)
