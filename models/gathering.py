@@ -99,4 +99,36 @@ class Gathering:
 
     @staticmethod
     def formatDate(date_string):
-        return datetime.strptime(date_string, '%m-%d-%Y %H:%M')
+        return datetime.strptime(date_string, '%m-%d-%Y %H:%M').isoformat()
+
+    @staticmethod
+    def isValidTotalSeats(integer_string):
+        if not integer_string.isNumeric():
+            raise ValueError("Value must be an integer")
+        number = int(integer_string)
+        if number < 2 or number > 5:
+            raise ValueError("Number of participants must be between 2 and 5")
+        else:
+            return True
+
+    @staticmethod
+    def isValidTime(integer_string):
+        if not integer_string.isNumeric():
+            raise ValueError("Value must be an integer")
+        number = int(integer_string)
+        if number < 1 or number > 10:
+            raise ValueError("Time must be between 1 and 10 minutes")
+        else:
+            return True
+
+    @staticmethod
+    def isValidNumberofTopics(integer_string):
+        if not integer_string.isNumeric():
+            raise ValueError("Value must be an integer")
+        number = int(integer_string)
+        if number < 1:
+            raise ValueError("You must have at least one topic")
+        elif number > 5:
+            raise ValueError("You must have less than 6 topics")
+        else:
+            return True

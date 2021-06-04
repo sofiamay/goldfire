@@ -77,5 +77,17 @@ async def create_gathering(ctx):
     await ctx.send(f'Choose a date and time in the format MM-DD-YYYY HH:MM')
     msg = await bot.wait_for('message', check=check)
     data['date_time'] = Gathering.formatDate(msg.content)
+    await ctx.send(f'Number of participants:')
+    msg = await bot.wait_for('message', check=check)
+    if Gathering.isValidTotalSeats(msg.content):
+        data['total_seats'] = int(msg.content)
+    await ctx.send(f'Time per topic in minutes:')
+    msg = await bot.wait_for('message', check=check)
+    if Gathering.isValidTime(msg.content):
+        data['time_per_topic'] = int(msg.content)
+    await ctx.send(f'Number of topics (3 recommended):')
+    msg = await bot.wait_for('message', check=check)
+    if Gathering.isValidNumberofTopics(msg.content):
+        data['number_of_topics'] = int(msg.content)
 
 bot.run(TOKEN)
