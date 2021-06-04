@@ -89,5 +89,6 @@ async def create_gathering(ctx):
     msg = await bot.wait_for('message', check=check)
     if Gathering.isValidNumberofTopics(msg.content):
         data['number_of_topics'] = int(msg.content)
+    print(data)
 
 bot.run(TOKEN)

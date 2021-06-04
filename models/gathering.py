@@ -9,7 +9,7 @@ from .user import User
 #     'total_seats': 4,
 #     'time_per_topic': 3,
 #     'number_of_topics': 3,
-#     'topics': ['kindess', 'heroic', 'action'], -> to set
+#     'topics': ['Kindess', 'Heroic', 'Action'], -> to set
 #     'users': [User.toJSON(), User.toJSON],
 #     'available_seats': 2, # property
 # }
