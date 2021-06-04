@@ -123,7 +123,7 @@ class Gathering:
 
     @staticmethod
     def isValidNumberofTopics(integer_string):
-        if not integer_string.isNumeric():
+        if not integer_string.isnumeric():
             raise ValueError("Value must be an integer")
         number = int(integer_string)
         if number < 1:
