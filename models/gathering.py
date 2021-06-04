@@ -19,7 +19,7 @@ class Gathering:
     def __init__(self, dict):
         self.name = dict.get('name') or 'An Unnamed Circle',
         if 'date_time' in dict:
-            self.date_time = datetime.fromfromisoformat(dict['date_time'])
+            self.date_time = datetime.fromisoformat(dict['date_time'])
         else:
             self.date_time = datetime.now() + timedelta(days=1)
         total_seats = dict.get('total_seats') or 4
@@ -100,6 +100,7 @@ class Gathering:
     @staticmethod
     def formatDate(date_string):
         return datetime.strptime(date_string, '%m-%d-%Y %H:%M').isoformat()
+
 
     @staticmethod
     def isValidTotalSeats(integer_string):
