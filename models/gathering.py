@@ -103,7 +103,7 @@ class Gathering:
 
     @staticmethod
     def isValidTotalSeats(integer_string):
-        if not integer_string.isNumeric():
+        if not integer_string.isnumeric():
             raise ValueError("Value must be an integer")
         number = int(integer_string)
         if number < 2 or number > 5:
@@ -113,7 +113,7 @@ class Gathering:
 
     @staticmethod
     def isValidTime(integer_string):
-        if not integer_string.isNumeric():
+        if not integer_string.isnumeric():
             raise ValueError("Value must be an integer")
         number = int(integer_string)
         if number < 1 or number > 10:
