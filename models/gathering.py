@@ -101,7 +101,6 @@ class Gathering:
     def formatDate(date_string):
         return datetime.strptime(date_string, '%m-%d-%Y %H:%M').isoformat()
 
-
     @staticmethod
     def isValidTotalSeats(integer_string):
         if not integer_string.isnumeric():

@@ -44,6 +44,29 @@ class Bot(commands.Bot):
                 )
             await ctx.send('\n'.join(gatherings))
 
+    async def select_topics(self, ctx, length):
+        def check(msg):
+            if (msg.author == ctx.author) and (msg.channel == ctx.channel):
+                return True
+            else:
+                return False
+
+        def print_dict(hashmap):
+            return '\n'.join([
+                "{0}: {1}".format(key, topic)
+                for key, topic in hashmap.items()
+            ])
+
+        topic_dict = Topics.topic_dict.copy()
+        result_list = []
+        while len(result_list) < length:
+            await ctx.send(
+                'Type the number corresponding to the topic to select it:\n{0}'
+                .format(print_dict(topic_dict))
+            )
+            msg = await bot.wait_for('message', check=check)
+            return msg
+
 
 bot = Bot()
 
