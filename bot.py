@@ -47,7 +47,7 @@ class Bot(commands.Bot):
                     filter(lambda gathering: (gathering.isOpen()), gatherings)
                 )
             await ctx.send(
-                '\n'.join([gathering.__str__ for gathering in gatherings])
+                '\n'.join([gathering.__str__() for gathering in gatherings])
             )
 
     async def select_topics(self, ctx, length):
