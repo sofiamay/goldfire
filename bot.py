@@ -63,10 +63,10 @@ class Bot(commands.Bot):
             )
             msg = await bot.wait_for('message', check=check)
             index = util.str_to_int(msg.content)
-            if index > len(available_topics):
+            if index > len(available_topics) - 1:
                 raise ValueError(
                     "Your selection must be between 1 and {0}".
-                    format(len(available_topics))
+                    format(len(available_topics) - 1)
                 )
             result_list.append(available_topics[index])
             available_topics.remove(index)
