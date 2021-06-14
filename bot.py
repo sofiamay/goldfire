@@ -1,5 +1,5 @@
 import os
-# import discord
+import discord
 from replit import db
 
 from discord.ext import commands
@@ -7,7 +7,6 @@ from discord.ext import commands
 # Models
 from models import Gathering
 from models import Topics
-from models import User
 
 # Util
 import util
@@ -20,8 +19,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
 # Required to access list of members. Must also check boxes in bot permmissions
-# intents = discord.Intents.all()
-# client = discord.Client(intents=intents)
+intents = discord.Intents.all()
 
 # initialize gatherings
 if 'gatherings' not in db:
@@ -32,7 +30,7 @@ if 'gatherings' not in db:
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix='!')
+        super().__init__(command_prefix='!', intents=intents)
 
     async def list_gatherings(self, ctx, only_open=False):
         if len(db['gatherings']) == 0:
