@@ -1,23 +1,10 @@
-
-# Private
-_topic_dict = {
-    1: 'Intro',
-    2: 'Kindness',
-    3: 'Discovery',
-    4: 'Joy',
-    5: 'Shared Sesource',
-    6: 'Shadow challenge',
-    7: 'Heroic',
-    8: 'Action',
-}
-
 # Private
 _topic_list = [
     'Intro',
     'Kindness',
     'Discovery',
     'Joy',
-    'Shared Sesource',
+    'Shared Resource',
     'Shadow challenge',
     'Heroic',
     'Action',
