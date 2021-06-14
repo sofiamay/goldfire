@@ -106,7 +106,9 @@ async def create_gathering(ctx):
     await ctx.send(f'Number of topics (3 recommended):')
     msg = await bot.wait_for('message', check=check)
     if Gathering.isValidNumberofTopics(msg.content):
-        data['number_of_topics'] = int(msg.content)
+        number_of_topics = int(msg.content)
+        data['number_of_topics'] = number_of_topics
     await ctx.send(f'Select topics:')
+    await bot.select_topics(ctx, number_of_topics)
 
 bot.run(TOKEN)
