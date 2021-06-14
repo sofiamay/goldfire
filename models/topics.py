@@ -52,6 +52,9 @@ class Topics:
     def __len__(self):
         return len(self._topic_dict)
 
+    def __getitem__(self, key):
+        return self._topic_dict[key]
+
     def contains(self, string):
         if string in list(self._topic_dict.values()):
             return True
