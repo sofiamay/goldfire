@@ -1,5 +1,5 @@
 import os
-import discord
+# import discord
 from replit import db
 
 from discord.ext import commands
@@ -19,7 +19,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
 # Required to access list of members. Must also check boxes in bot permmissions
-intents = discord.Intents.all()
+# intents = discord.Intents.all()
 
 # initialize gatherings
 if 'gatherings' not in db:
@@ -30,12 +30,13 @@ if 'gatherings' not in db:
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix='!', intents=intents)
+        super().__init__(command_prefix='!')
 
     async def list_gatherings(self, ctx, only_open=False):
         if len(db['gatherings']) == 0:
             await ctx.send('There are no Circles scheduled')
         else:
+            print(len(db['gatherings']))
             gatherings = [
                 Gathering(gathering_data)
                 for gathering_data in db['gatherings']
