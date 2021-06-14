@@ -49,6 +49,9 @@ class Topics:
     def __init__(self, dict):
         self._topic_dict = dict
 
+    def __len__(self):
+        return len(self._topic_dict)
+
     def contains(self, string):
         if string in list(self._topic_dict.values()):
             return True

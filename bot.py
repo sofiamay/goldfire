@@ -8,6 +8,9 @@ from discord.ext import commands
 from models import Gathering
 from models import Topics
 
+# Util
+import util
+
 # Not needed for repl.it
 # from dotenv import load_dotenv
 # load_dotenv()
@@ -59,7 +62,15 @@ class Bot(commands.Bot):
                 .format(available_topics.pprint())
             )
             msg = await bot.wait_for('message', check=check)
-            return msg
+            index = util.str_to_int(msg.content)
+            if index > len(available_topics):
+                raise ValueError(
+                    "Your selection must be between 1 and {0}".
+                    format(len(available_topics))
+                )
+            result_list.append(available_topics[index])
+            available_topics.remove(index)
+        print(f'The topic list is {result_list}')
 
 
 bot = Bot()
