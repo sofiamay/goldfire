@@ -92,28 +92,6 @@ class Gathering:
         \tMembers joined - {users}
         \tStatus - {status}""".format(**args)
 
-    # Override: Method called when printing class
-    def __repr__(self):
-        args = {
-            'name': self.name,
-            'start_time': self.date_time.strftime('%b %d %H:%M'),
-            'total_seats': self.total_seats,
-            'available_seats': self.available_seats,
-            'time_per_topic': self.time_per_topic,
-            'number_of_topics': self.number_of_topics,
-            'topics': ', '.join(self.topics),
-            'users': ', '.join([user.name for user in self.users]),
-            'status': 'open' if self.isOpen() else False
-        }
-        return """{name}:
-        \tStart time - {start_time}
-        \tTotal seats - {total_seats}
-        \tAvailable seats - {available_seats}
-        \tTime Per topic - {time_per_topic}
-        \tNumber of topicss - {number_of_topics}
-        \tTopics - {topics}
-        \tMembers joined - {users}
-        \tStatus - {status}""".format(**args)
     @staticmethod
     def isValidName(name):
         if len(name) > 30:

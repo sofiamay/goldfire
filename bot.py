@@ -46,7 +46,9 @@ class Bot(commands.Bot):
                 gatherings = list(
                     filter(lambda gathering: (gathering.isOpen()), gatherings)
                 )
-            await ctx.send('\n'.join(gatherings))
+            await ctx.send(
+                '\n'.join([gathering.__str__ for gathering in gatherings])
+            )
 
     async def select_topics(self, ctx, length):
         def check(msg):
