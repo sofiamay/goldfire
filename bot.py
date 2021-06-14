@@ -70,7 +70,7 @@ class Bot(commands.Bot):
                 )
             result_list.append(available_topics[index])
             available_topics.remove(index)
-        print(f'The topic list is {result_list}')
+        await ctx.send(f'Your selections are: {", ".join(result_list)}')
 
 
 bot = Bot()
