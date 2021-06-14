@@ -43,6 +43,9 @@ _topic_dict = {
 
 
 class Topics:
+    # Class attribute:
+    all_topics = _topic_dict
+
     def __init__(self, dict):
         self._topic_dict = dict
 
