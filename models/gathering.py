@@ -82,7 +82,7 @@ class Gathering:
             'users': ', '.join([user.name for user in self.users]),
             'status': 'open' if self.isOpen() else False
         }
-        return """Name - {name}:
+        return """{name}:
         \tStart time - {start_time}
         \tTotal seats - {total_seats}
         \tAvailable seats - {available_seats}
