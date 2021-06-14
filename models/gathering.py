@@ -79,7 +79,7 @@ class Gathering:
             'time_per_topic': self.time_per_topic,
             'number_of_topics': self.number_of_topics,
             'topics': ', '.join(self.topics),
-            'users': ', '.join(self.users),
+            'users': ', '.join([user.name for user in self.users]),
             'status': 'open' if self.isOpen() else False
         }
         return """{name}:
