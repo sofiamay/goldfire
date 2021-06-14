@@ -17,7 +17,7 @@ from .user import User
 
 class Gathering:
     def __init__(self, dict):
-        self.name = dict.get('name') or 'An Unnamed Circle',
+        self.name = dict.get('name') or 'An Unnamed Circle'
         if 'date_time' in dict:
             self.date_time = datetime.strptime(
                 dict['date_time'], '%m-%d-%Y %H:%M'

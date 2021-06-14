@@ -124,7 +124,6 @@ async def create_gathering(ctx):
     await bot.select_topics(ctx, number_of_topics)
     data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
     gathering = Gathering(data)
-    print(gathering.name)
     print(gathering)
 
 bot.run(TOKEN)
