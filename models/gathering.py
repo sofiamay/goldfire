@@ -34,7 +34,6 @@ class Gathering:
                 raise IndexError(
                     'There are more topics listed than the number of topics'
                 )
-            # FIX
             for topic in topics:
                 if not ALL_TOPICS.contains(topic):
                     raise ValueError(f'{topic} is not a valid topic')
