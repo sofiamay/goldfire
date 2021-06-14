@@ -51,6 +51,18 @@ class Topics:
             return True
         return False
 
+    def add(self, string):
+        index = len(self._topic_dict) + 1
+        self._topic_dict[index] = string
+
+    def remove(self, index):
+        self._topic_dict.pop(index)
+
+    def removeByTopic(self, string):
+        self._topic_dict = {
+            key: val for key, val in self.topic_dict.items() if val != string
+        }
+
     def pprint(self):
         return '\n'.join([
             "{0}: {1}".format(key, topic)
