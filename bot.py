@@ -36,7 +36,6 @@ class Bot(commands.Bot):
         if len(db['gatherings']) == 0:
             await ctx.send('There are no Circles scheduled')
         else:
-            print(len(db['gatherings']))
             gatherings = [
                 Gathering(gathering_data)
                 for gathering_data in db['gatherings']
@@ -129,6 +128,7 @@ async def create_gathering(ctx):
     await ctx.send(f'Select topics:')
     await bot.select_topics(ctx, number_of_topics)
     data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
+    await ctx.send('Circle Created! Type "!list" to view all Circles')
     return db['gatherings'].append(data)
 
 bot.run(TOKEN)
