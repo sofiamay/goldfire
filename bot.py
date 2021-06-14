@@ -94,6 +94,11 @@ async def list_open_gatherings(ctx):
     await bot.list_gatherings(ctx, only_open=True)
 
 
+@bot.command(name='clear', help='this command will clear msgs')
+async def clear(ctx, amount=100):
+    await ctx.channel.purge(limit=amount)
+
+
 @bot.command(name='create', help='Create a new Circle')
 async def create_gathering(ctx):
     def check(message):
