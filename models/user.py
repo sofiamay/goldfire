@@ -10,16 +10,16 @@
 
 class User:
     def __init__(self, dict):
-        self.username = dict['username']
+        self.name = dict['name']
         self.id = dict['id']
 
     def toJSON(self):
         return {
             'user': {
-                'username': self.username,
+                'name': self.username,
                 'id': self.id,
             }
         }
 
     def __str__(self):
-        return f'{self.username}'
+        return f'{self.name}'
