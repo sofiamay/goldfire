@@ -99,6 +99,7 @@ async def create_gathering(ctx):
         else:
             return False
     data = {}
+    print(ctx.author)
     await ctx.send('Type a name for your Circle:')
     msg = await bot.wait_for('message', check=check)
     if Gathering.isValidName(msg.content):
@@ -121,5 +122,6 @@ async def create_gathering(ctx):
         data['number_of_topics'] = number_of_topics
     await ctx.send(f'Select topics:')
     await bot.select_topics(ctx, number_of_topics)
+    data['users'] = []
 
 bot.run(TOKEN)
