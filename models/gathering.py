@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from .topics import Topics
+from .topics import ALL_TOPICS
 from .user import User
 
 # Gathering Model
@@ -34,8 +34,9 @@ class Gathering:
                 raise IndexError(
                     'There are more topics listed than the number of topics'
                 )
+            # FIX
             for topic in topics:
-                if not Topics.isValid(topic):
+                if not ALL_TOPICS.contains(topic):
                     raise ValueError(f'{topic} is not a valid topic')
             self.topics = topics
         else:

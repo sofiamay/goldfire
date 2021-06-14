@@ -1,3 +1,3 @@
 from .gathering import Gathering
 from .user import User
-from .topics import Topics
+from .topics import Topics, ALL_TOPICS
