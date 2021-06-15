@@ -1,4 +1,5 @@
 import os
+import time
 # import discord
 from replit import db
 
@@ -129,6 +130,8 @@ async def create_gathering(ctx):
     await bot.select_topics(ctx, number_of_topics)
     data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
     await ctx.send('Circle Created! Type "!list" to view all Circles')
-    return db['gatherings'].append(data)
+    db['gatherings'].append(data)
+    time.sleep(2)
+    await ctx.invoke(bot.get_command('clear'), query='hi')
 
 bot.run(TOKEN)
