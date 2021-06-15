@@ -47,7 +47,7 @@ class Bot(commands.Bot):
                     filter(lambda gathering: (gathering.isOpen()), gatherings)
                 )
             await ctx.send(
-                '\n'.join([gathering.__str__() for gathering in gatherings])
+                '\n'.join([gathering.toString() for gathering in gatherings])
             )
 
     async def select_topics(self, ctx, length):
@@ -131,7 +131,9 @@ async def create_gathering(ctx):
     await ctx.send(f'Select topics:')
     data['topics'] = await bot.select_topics(ctx, number_of_topics)
     data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
-    await ctx.send('Circle Created! Type "!list" to view all Circles')
+    gathering = Gathering(data)
+    await ctx.send('Circle Created! Type "!list" to view all Circles:')
+    await ctx.send(gathering.toString())
     db['gatherings'].append(data)
     time.sleep(2)
     await ctx.invoke(bot.get_command('clear'))
