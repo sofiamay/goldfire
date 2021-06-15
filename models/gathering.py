@@ -30,6 +30,8 @@ class Gathering:
         number_of_topics = dict.get('number_of_topics') or 3
         # Topics
         self.number_of_topics = number_of_topics
+        print("These are ALL_TOPICS:")
+        print(ALL_TOPICS._topic_list)
         if 'topics' in dict:
             topics = set(dict['topics'])
             if len(topics) > number_of_topics:
