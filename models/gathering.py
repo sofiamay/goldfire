@@ -101,7 +101,9 @@ class Gathering:
 
     @staticmethod
     def formatDate(date_string):
-        datetime.strptime(date_string, '%m-%d-%Y %H:%M')
+        date = datetime.strptime(date_string, '%m-%d-%Y %H:%M')
+        if date < datetime.now():
+            raise ValueError('Date must be in the future')
         return date_string
 
     @staticmethod
