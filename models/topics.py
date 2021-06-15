@@ -1,4 +1,4 @@
-import copy
+from copy import deepcopy
 
 # Private
 _topic_list = [
@@ -23,7 +23,6 @@ class Topics:
     def __len__(self):
         return len(self._topic_list)
 
-    # FIX
     def __getitem__(self, index):
         return self._topic_list[index]
 
@@ -52,4 +51,4 @@ class Topics:
         ])
 
 
-ALL_TOPICS = Topics(copy.deepcopy(_topic_list))
+ALL_TOPICS = Topics(deepcopy(_topic_list))

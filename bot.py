@@ -138,4 +138,18 @@ async def create_gathering(ctx):
     time.sleep(2)
     await ctx.invoke(bot.get_command('clear'))
 
+
+@bot.command(name='join', help='Join an open circle')
+async def join_gathering(ctx):
+    def check(message):
+        if (message.author == ctx.author) and (message.channel == ctx.channel):
+            return True
+        else:
+            return False
+    gatherings = []
+    for gathering_data in db['gatherings']:
+        gathering = Gathering(gathering_data)
+        if gathering.isOpen():
+            gatherings.append(gathering)
+
 bot.run(TOKEN)
