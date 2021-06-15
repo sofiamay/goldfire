@@ -73,6 +73,7 @@ class Bot(commands.Bot):
             result_list.append(available_topics[index])
             available_topics.remove(index)
         await ctx.send(f'Your selections are: {", ".join(result_list)}')
+        return result_list
 
 
 bot = Bot()
@@ -127,11 +128,11 @@ async def create_gathering(ctx):
         number_of_topics = int(msg.content)
         data['number_of_topics'] = number_of_topics
     await ctx.send(f'Select topics:')
-    await bot.select_topics(ctx, number_of_topics)
+    data['topics'] = await bot.select_topics(ctx, number_of_topics)
     data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
     await ctx.send('Circle Created! Type "!list" to view all Circles')
     db['gatherings'].append(data)
     time.sleep(2)
-    await ctx.invoke(bot.get_command('clear'), query='hi')
+    await ctx.invoke(bot.get_command('clear'))
 
 bot.run(TOKEN)
