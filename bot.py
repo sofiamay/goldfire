@@ -1,5 +1,6 @@
 import os
 import time
+from copy import deepcopy
 # import discord
 from replit import db
 
@@ -56,7 +57,7 @@ class Bot(commands.Bot):
             else:
                 return False
 
-        available_topics = Topics(Topics.all_topics)
+        available_topics = Topics(deepcopy(Topics.all_topics))
         result_list = []
         while len(result_list) < length:
             await ctx.send(

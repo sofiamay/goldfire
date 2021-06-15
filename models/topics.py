@@ -1,3 +1,5 @@
+import copy
+
 # Private
 _topic_list = [
     'Intro',
@@ -50,4 +52,4 @@ class Topics:
         ])
 
 
-ALL_TOPICS = Topics(_topic_list)
+ALL_TOPICS = Topics(copy.deepcopy(_topic_list))
