@@ -76,6 +76,16 @@ class Bot(commands.Bot):
         await ctx.send(f'Your selections are: {", ".join(result_list)}')
         return result_list
 
+    def pprint_gatherings(self, gatherings):
+        gatherings_dict = {
+            i: gatherings[i] for i in range(0, len(gatherings))
+        }
+
+        return '\n'.join([
+            "{0}: {1}".format(key, gathering)
+            for key, gathering in gatherings_dict.items()
+        ])
+
 
 bot = Bot()
 
@@ -151,5 +161,9 @@ async def join_gathering(ctx):
         gathering = Gathering(gathering_data)
         if gathering.isOpen():
             gatherings.append(gathering)
+    await ctx.send(
+        'Type the number of the circle you want to join:{0}'
+        .format(bot.pprint_gatherings(gatherings))
+    )
 
 bot.run(TOKEN)
