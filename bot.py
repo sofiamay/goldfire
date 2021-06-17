@@ -170,7 +170,7 @@ async def join_gathering(ctx):
     if (index > len(gatherings) - 1) or index < 0:
         raise ValueError('Number is out of range')
     gathering = gatherings[index]
-    user = User({{'name': ctx.author.name, 'id': ctx.author.id}})
+    user = User({'name': ctx.author.name, 'id': ctx.author.id})
     if user not in gathering.users:
         gathering.users.append(user)
 
