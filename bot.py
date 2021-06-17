@@ -7,7 +7,7 @@ from replit import db
 from discord.ext import commands
 
 # Models
-from models import Gathering
+from models import Gathering, User
 from models import Topics
 
 # Util
@@ -165,5 +165,14 @@ async def join_gathering(ctx):
         'Type the number of the circle you want to join:{0}'
         .format(bot.pprint_gatherings(gatherings))
     )
+    msg = await bot.wait_for('message', check=check)
+    index = util.string_to_int(msg.content)
+    if (index > len(gatherings) - 1) or index < 0:
+        raise ValueError('Number is out of range')
+    gathering = gatherings[index]
+    user = User({{'name': ctx.author.name, 'id': ctx.author.id}})
+    if user not in gathering.users:
+        gathering.users.append(user)
+
 
 bot.run(TOKEN)

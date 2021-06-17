@@ -83,7 +83,7 @@ class Gathering:
             'number_of_topics': self.number_of_topics,
             'topics': ', '.join(self.topics),
             'users': ', '.join([user.name for user in self.users]),
-            'status': 'open' if self.isOpen() else False
+            'status': 'open' if self.isOpen() else 'closed'
         }
         return """{name}:
         \tStart time - {start_time}
