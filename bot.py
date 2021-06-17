@@ -162,11 +162,11 @@ async def join_gathering(ctx):
         if gathering.isOpen():
             gatherings.append(gathering)
     await ctx.send(
-        'Type the number of the circle you want to join:{0}'
+        'Type the number of the circle you want to join:\n{0}'
         .format(bot.pprint_gatherings(gatherings))
     )
     msg = await bot.wait_for('message', check=check)
-    index = util.string_to_int(msg.content)
+    index = util.str_to_int(msg.content)
     if (index > len(gatherings) - 1) or index < 0:
         raise ValueError('Number is out of range')
     gathering = gatherings[index]
