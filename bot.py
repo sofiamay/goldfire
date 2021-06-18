@@ -97,12 +97,18 @@ async def on_ready():
 
 @bot.command(name='list', help='Lists all Circles')
 async def list_gatherings(ctx):
-    await bot.list_gatherings(ctx)
+    try:
+        await bot.list_gatherings(ctx)
+    except (ValueError, IndexError) as e:
+        await ctx.send(f'Error: {str(e)}')
 
 
 @bot.command(name='list open', help='Lists circles with availability')
 async def list_open_gatherings(ctx):
-    await bot.list_gatherings(ctx, only_open=True)
+    try:
+        await bot.list_gatherings(ctx, only_open=True)
+    except (ValueError, IndexError) as e:
+        await ctx.send(f'Error: {str(e)}')
 
 
 @bot.command(name='clear', help='this command will clear msgs')
@@ -161,23 +167,26 @@ async def join_gathering(ctx):
             return True
         else:
             return False
-    gatherings = []
-    for gathering_data in db['gatherings']:
-        gathering = Gathering(gathering_data)
-        if gathering.isOpen():
-            gatherings.append(gathering)
-    await ctx.send(
-        'Type the number of the circle you want to join:\n{0}'
-        .format(bot.pprint_gatherings(gatherings))
-    )
-    msg = await bot.wait_for('message', check=check)
-    index = util.str_to_int(msg.content)
-    if (index > len(gatherings) - 1) or index < 0:
-        raise ValueError('Number is out of range')
-    gathering = gatherings[index]
-    user = User({'name': ctx.author.name, 'id': ctx.author.id})
-    if user not in gathering.users:
-        gathering.users.append(user)
+    try:
+        gatherings = []
+        for gathering_data in db['gatherings']:
+            gathering = Gathering(gathering_data)
+            if gathering.isOpen():
+                gatherings.append(gathering)
+        await ctx.send(
+            'Type the number of the circle you want to join:\n{0}'
+            .format(bot.pprint_gatherings(gatherings))
+        )
+        msg = await bot.wait_for('message', check=check)
+        index = util.str_to_int(msg.content)
+        if (index > len(gatherings) - 1) or index < 0:
+            raise ValueError('Number is out of range')
+        gathering = gatherings[index]
+        user = User({'name': ctx.author.name, 'id': ctx.author.id})
+        if user not in gathering.users:
+            gathering.users.append(user)
+    except (ValueError, IndexError) as e:
+        await ctx.send(f'Error: {str(e)}')
 
 
 bot.run(TOKEN)
