@@ -9,7 +9,7 @@ from models import Topics, Gathering
 import util
 
 # Cogs
-import _tasks
+import bot._tasks as _tasks
 
 
 class Bot(commands.Bot):
