@@ -4,13 +4,14 @@ from replit import db
 
 # from discord.ext import commands
 
-from bot import Bot
-
 # Models
 from models import Gathering, User
 
 # Util
 import util
+
+# Bot
+from bot import scheduling_bot as bot
 
 
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -22,9 +23,6 @@ GUILD = os.getenv('DISCORD_GUILD')
 # initialize gatherings
 if 'gatherings' not in db:
     db['gatherings'] = []
-
-
-bot = Bot()
 
 
 @bot.event

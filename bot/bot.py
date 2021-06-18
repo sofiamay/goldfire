@@ -8,6 +8,9 @@ from models import Topics, Gathering
 # Util
 import util
 
+# Cogs
+import _tasks
+
 
 class Bot(commands.Bot):
     def __init__(self):
@@ -64,3 +67,8 @@ class Bot(commands.Bot):
             "{0}: {1}".format(key, gathering)
             for key, gathering in gatherings_dict.items()
         ])
+
+
+# Export:
+scheduling_bot = Bot()
+scheduling_bot.add_cog(_tasks.TasksCog())
