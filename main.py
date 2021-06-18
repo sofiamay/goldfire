@@ -132,7 +132,8 @@ async def on_message(message):
     if (message.channel == scheduling_channel) and not (
         message.content.startswith('!')
     ):
-        await message.delete(message)
+        await message.delete()
+    await bot.process_commands(message)
 
 
 bot.run(TOKEN)
