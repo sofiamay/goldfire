@@ -1,7 +1,5 @@
 import os
 import time
-# from copy import deepcopy
-# import discord
 from replit import db
 
 # from discord.ext import commands
@@ -10,14 +8,10 @@ from bot import Bot
 
 # Models
 from models import Gathering, User
-# from models import Topics
 
 # Util
 import util
 
-# Not needed for repl.it
-# from dotenv import load_dotenv
-# load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -28,8 +22,6 @@ GUILD = os.getenv('DISCORD_GUILD')
 # initialize gatherings
 if 'gatherings' not in db:
     db['gatherings'] = []
-
-# bot = commands.bot(command_prefix='!')
 
 
 bot = Bot()
