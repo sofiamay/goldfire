@@ -126,6 +126,8 @@ async def join_gathering(ctx):
 # Delete all messages that don't start with '!'
 @bot.event
 async def on_message(message):
+    if message.author.bot:
+        return
     scheduling_channel = discord.utils.get(
         bot.get_all_channels(), name='schedule-a-coin-session'
     )
