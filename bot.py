@@ -117,36 +117,41 @@ async def create_gathering(ctx):
             return True
         else:
             return False
-    data = {}
-    await ctx.send('Type a name for your Circle:')
-    msg = await bot.wait_for('message', check=check)
-    if Gathering.isValidName(msg.content):
-        data['name'] = msg.content
-    await ctx.send(f'Choose a date and time in the format MM-DD-YYYY HH:MM')
-    msg = await bot.wait_for('message', check=check)
-    data['date_time'] = Gathering.formatDate(msg.content)
-    await ctx.send(f'Number of participants:')
-    msg = await bot.wait_for('message', check=check)
-    if Gathering.isValidTotalSeats(msg.content):
-        data['total_seats'] = int(msg.content)
-    await ctx.send(f'Time per topic in minutes:')
-    msg = await bot.wait_for('message', check=check)
-    if Gathering.isValidTime(msg.content):
-        data['time_per_topic'] = int(msg.content)
-    await ctx.send(f'Number of topics (3 recommended):')
-    msg = await bot.wait_for('message', check=check)
-    if Gathering.isValidNumberofTopics(msg.content):
-        number_of_topics = int(msg.content)
-        data['number_of_topics'] = number_of_topics
-    await ctx.send(f'Select topics:')
-    data['topics'] = await bot.select_topics(ctx, number_of_topics)
-    data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
-    gathering = Gathering(data)
-    await ctx.send('Circle Created! Type "!list" to view all Circles:')
-    await ctx.send(gathering.toString())
-    db['gatherings'].append(data)
-    time.sleep(2)
-    await ctx.invoke(bot.get_command('clear'))
+    try:
+        data = {}
+        await ctx.send('Type a name for your Circle:')
+        msg = await bot.wait_for('message', check=check)
+        if Gathering.isValidName(msg.content):
+            data['name'] = msg.content
+        await ctx.send(
+            f'Choose a date and time in the format MM-DD-YYYY HH:MM'
+        )
+        msg = await bot.wait_for('message', check=check)
+        data['date_time'] = Gathering.formatDate(msg.content)
+        await ctx.send(f'Number of participants:')
+        msg = await bot.wait_for('message', check=check)
+        if Gathering.isValidTotalSeats(msg.content):
+            data['total_seats'] = int(msg.content)
+        await ctx.send(f'Time per topic in minutes:')
+        msg = await bot.wait_for('message', check=check)
+        if Gathering.isValidTime(msg.content):
+            data['time_per_topic'] = int(msg.content)
+        await ctx.send(f'Number of topics (3 recommended):')
+        msg = await bot.wait_for('message', check=check)
+        if Gathering.isValidNumberofTopics(msg.content):
+            number_of_topics = int(msg.content)
+            data['number_of_topics'] = number_of_topics
+        await ctx.send(f'Select topics:')
+        data['topics'] = await bot.select_topics(ctx, number_of_topics)
+        data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
+        gathering = Gathering(data)
+        await ctx.send('Circle Created! Type "!list" to view all Circles:')
+        await ctx.send(gathering.toString())
+        db['gatherings'].append(data)
+        time.sleep(2)
+        await ctx.invoke(bot.get_command('clear'))
+    except (ValueError, IndexError) as e:
+        await ctx.send(f'Error: {str(e)}')
 
 
 @bot.command(name='join', help='Join an open circle')
