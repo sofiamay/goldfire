@@ -3,7 +3,7 @@ from datetime import datetime
 from replit import db
 
 
-class CleanupCog(commands.Cog):
+class TasksCog(commands.Cog):
 
     @tasks.loop(minutes=5.0)
     async def cleanup(self):
