@@ -1,8 +1,7 @@
 import os
 import time
 from replit import db
-
-# from discord.ext import commands
+import discord
 
 # Models
 from models import Gathering, User
@@ -122,6 +121,18 @@ async def join_gathering(ctx):
             gathering.users.append(user)
     except (ValueError, IndexError) as e:
         await ctx.send(f'Error: {str(e)}')
+
+
+# Delete all messages that don't start with '!'
+@bot.event
+async def on_message(message):
+    scheduling_channel = discord.utils.get(
+        bot.get_all_channels(), name='schedule-a-coin-session'
+    )
+    if (message.channel == scheduling_channel) and not (
+        message.content.startswith('!')
+    ):
+        await message.delete(message)
 
 
 bot.run(TOKEN)
