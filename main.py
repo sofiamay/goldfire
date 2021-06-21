@@ -177,6 +177,8 @@ async def delete_gathering(ctx):
             return
     except (ValueError, IndexError) as e:
         await ctx.send(f'Error: {str(e)}')
+    except Exception as e:
+        print(e)
 
 
 # Delete all messages that don't start with '!'
