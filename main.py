@@ -170,9 +170,9 @@ async def delete_gathering(ctx):
         )
         msg = await bot.wait_for('message', check=check)
         if msg.content not in ['y', 'n']:
-            print("You didn't type y or n")
             raise ValueError('Type y or n only')
         if msg.content == 'y':
+            print('Trying to delete')
             db['gatherings'].remove(selected_gathering.toJSON())
             await ctx.send('Circle Deleted')
             return
