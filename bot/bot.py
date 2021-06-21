@@ -55,10 +55,10 @@ class Bot(commands.Bot):
                 )
             result_list.append(available_topics[index])
             await ctx.send(
-                f'Topic {len(result_list)}: {available_topics[index]}'
+                f'**Topic {len(result_list)}: {available_topics[index]}**'
             )
             available_topics.remove(index)
-        await ctx.send(f'Your selections are: {", ".join(result_list)}')
+        await ctx.send(f'**Your selections are: {", ".join(result_list)}**')
         return result_list
 
     def pprint_gatherings(self, gatherings):
