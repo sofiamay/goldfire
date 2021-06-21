@@ -54,7 +54,9 @@ class Bot(commands.Bot):
                     format(len(available_topics) - 1)
                 )
             result_list.append(available_topics[index])
-            await ctx.send(f'Topic {index}: {available_topics[index]}')
+            await ctx.send(
+                f'Topic {len(result_list)}: {available_topics[index]}'
+            )
             available_topics.remove(index)
         await ctx.send(f'Your selections are: {", ".join(result_list)}')
         return result_list
