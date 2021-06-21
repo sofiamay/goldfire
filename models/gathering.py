@@ -66,7 +66,7 @@ class Gathering:
     def toJSON(self):
         return {
             'name': self.name,
-            'date_time': self.date_time.isoformat(),
+            'date_time': self.date_time.strftime('%b %d %H:%M'),
             'total_seats': self.total_seats,
             'time_per_topic': self.time_per_topic,
             'number_of_topics': self.number_of_topics,
