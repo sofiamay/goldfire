@@ -173,8 +173,10 @@ async def delete_gathering(ctx):
             raise ValueError('Type y or n only')
         if msg.content == 'y':
             index = all_gatherings.index(selected_gathering)
-            print(index)
             del db['gatherings'][index]
+            await ctx.send('Circled Deleted')
+            time.sleep(2)
+            await ctx.invoke(bot.get_command('clear'))
     except (ValueError, IndexError) as e:
         await ctx.send(f'Error: {str(e)}')
 
