@@ -172,9 +172,11 @@ async def delete_gathering(ctx):
         if msg.content not in ['y', 'n']:
             raise ValueError('Type y or n only')
         if msg.content == 'y':
-            db['gatherings'].remove(selected_gathering.toJSON())
-            await ctx.send('Circle Deleted')
-            return
+            if selected_gathering.toJSON() in db['gatherings']:
+                print('Gathering found')
+            # db['gatherings'].remove(selected_gathering.toJSON())
+            # await ctx.send('Circle Deleted')
+            # return
     except (ValueError, IndexError) as e:
         await ctx.send(f'Error: {str(e)}')
 
