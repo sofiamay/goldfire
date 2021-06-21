@@ -63,32 +63,37 @@ async def create_gathering(ctx):
         msg = await bot.wait_for('message', check=check)
         if Gathering.isValidName(msg.content):
             data['name'] = msg.content
+            await ctx.send(f'Your Circle\'s Name: {msg.content}')
         await ctx.send(
             f'Choose a date and time in the format MM-DD-YYYY HH:MM'
         )
         msg = await bot.wait_for('message', check=check)
         data['date_time'] = Gathering.formatDate(msg.content)
+        await ctx.send(f'Start Time: {msg.content}')
         await ctx.send(f'Number of participants:')
         msg = await bot.wait_for('message', check=check)
         if Gathering.isValidTotalSeats(msg.content):
             data['total_seats'] = int(msg.content)
+            await ctx.send(f'Number of participants: {msg.content}')
         await ctx.send(f'Time per topic in minutes:')
         msg = await bot.wait_for('message', check=check)
         if Gathering.isValidTime(msg.content):
             data['time_per_topic'] = int(msg.content)
+            await ctx.send(f'Time per Topic: {msg.content}')
         await ctx.send(f'Number of topics (3 recommended):')
         msg = await bot.wait_for('message', check=check)
         if Gathering.isValidNumberofTopics(msg.content):
             number_of_topics = int(msg.content)
             data['number_of_topics'] = number_of_topics
+            await ctx.send(f'Number of Topics: {msg.content}')
         await ctx.send(f'Select topics:')
         data['topics'] = await bot.select_topics(ctx, number_of_topics)
         data['author'] = {'name': ctx.author.name, 'id': ctx.author.id}
         data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
         gathering = Gathering(data)
         await ctx.send('Circle Created! Type "!list" to view all Circles:')
-        await ctx.send(gathering.toString())
         db['gatherings'].append(data)
+        await ctx.send(gathering.toString())
         time.sleep(2)
         await ctx.invoke(bot.get_command('clear'))
     except (ValueError, IndexError) as e:
@@ -120,6 +125,7 @@ async def join_gathering(ctx):
         user = User({'name': ctx.author.name, 'id': ctx.author.id})
         if user not in gathering.users:
             gathering.users.append(user)
+        await ctx.send(f'You have joined: {gathering.name}')
     except (ValueError, IndexError) as e:
         await ctx.send(f'Error: {str(e)}')
 

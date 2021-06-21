@@ -88,6 +88,7 @@ class Gathering:
             'time_per_topic': self.time_per_topic,
             'number_of_topics': self.number_of_topics,
             'topics': ', '.join(self.topics),
+            'author': self.author.name,
             'users': ', '.join([user.name for user in self.users]),
             'status': 'open' if self.isOpen() else 'closed'
         }
@@ -98,6 +99,7 @@ class Gathering:
         \tTime Per topic - {time_per_topic}
         \tNumber of topicss - {number_of_topics}
         \tTopics - {topics}
+        \tAuthor - {author}
         \tMembers joined - {users}
         \tStatus - {status}""".format(**args)
 
