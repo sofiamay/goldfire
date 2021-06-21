@@ -155,7 +155,7 @@ async def delete_gathering(ctx):
         # Author created multiple gatherings
         else:
             await ctx.send(
-                'Select the Index of the Circle to delete:\n{0}'
+                '**Select the Index of the Circle to delete:**\n{0}'
                 .format(bot.pprint_gatherings(gatherings))
             )
             msg = await bot.wait_for('message', check=check)
@@ -165,7 +165,7 @@ async def delete_gathering(ctx):
             selected_gathering = gatherings[index]
         # Delete Selected Gathering:
         await ctx.send(
-            'Do you wish to delete this gathering? Type y or n\n{0}'
+            '**Do you wish to delete this gathering? Type y or n**\n{0}'
             .format(selected_gathering.toString())
         )
         msg = await bot.wait_for('message', check=check)

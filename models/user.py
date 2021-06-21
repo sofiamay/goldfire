@@ -16,7 +16,7 @@ class User:
     def toJSON(self):
         return {
             'user': {
-                'name': self.username,
+                'name': self.name,
                 'id': self.id,
             }
         }
