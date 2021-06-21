@@ -169,7 +169,7 @@ async def delete_gathering(ctx):
             .format(selected_gathering.toString())
         )
         msg = await bot.wait_for('message', check=check)
-        if msg.content not in msg.content['y', 'n']:
+        if msg.content not in ['y', 'n']:
             raise ValueError('Type y or n only')
         if msg.content == 'y':
             db['gatherings'].remove(selected_gathering.toJSON())
