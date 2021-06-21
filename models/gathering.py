@@ -66,7 +66,7 @@ class Gathering:
     def toJSON(self):
         return {
             'name': self.name,
-            'date_time': self.date_time.strftime('%b %d %H:%M'),
+            'date_time': self.date_time.strftime('%m-%d-%Y %H:%M'),
             'total_seats': self.total_seats,
             'time_per_topic': self.time_per_topic,
             'number_of_topics': self.number_of_topics,
@@ -82,7 +82,7 @@ class Gathering:
     def __str__(self):
         args = {
             'name': self.name,
-            'start_time': self.date_time.strftime('%b %d %H:%M'),
+            'start_time': self.date_time.strftime('%m-%d-%Y %H:%M'),
             'total_seats': self.total_seats,
             'available_seats': self.available_seats,
             'time_per_topic': self.time_per_topic,
