@@ -141,11 +141,11 @@ async def delete_gathering(ctx):
         await ctx.send('No Gatherings')
         return
     try:
-        gatherings = []
-        for gathering_data in db['gatherings']:
-            gathering = Gathering(gathering_data)
-            if gathering.author.id == ctx.author.id:
-                gatherings.append(gathering)
+        all_gatherings = [Gathering(data) for data in db['gatherings']]
+        gatherings = [
+            gathering for gathering in all_gatherings
+            if gathering.author.id == ctx.author.id
+        ]
         if not gatherings:
             await ctx.send('You did not create any gatherings')
             return
@@ -172,11 +172,9 @@ async def delete_gathering(ctx):
         if msg.content not in ['y', 'n']:
             raise ValueError('Type y or n only')
         if msg.content == 'y':
-            if selected_gathering.toJSON() in db['gatherings']:
-                print('Gathering found')
-            # db['gatherings'].remove(selected_gathering.toJSON())
-            # await ctx.send('Circle Deleted')
-            # return
+            index = all_gatherings.index(selected_gathering)
+            print(index)
+            del db['gatherings'][index]
     except (ValueError, IndexError) as e:
         await ctx.send(f'Error: {str(e)}')
 
