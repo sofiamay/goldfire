@@ -10,6 +10,7 @@ from .user import User
 #     'time_per_topic': 3,
 #     'number_of_topics': 3,
 #     'topics': ['Kindess', 'Heroic', 'Action'], -> to set
+#     'author': User()
 #     'users': [User.toJSON(), User.toJSON],
 #     'available_seats': 2, # property
 # }
@@ -42,6 +43,10 @@ class Gathering:
             self.topics = topics
         else:
             self.topics = set()
+        if 'author' in dict:
+            self.author = User(dict['author'])
+        else:
+            self.author = None
         # Users
         if 'users' in dict:
             self.users = [User(userdict) for userdict in dict['users']]
@@ -66,6 +71,7 @@ class Gathering:
             'time_per_topic': self.time_per_topic,
             'number_of_topics': self.number_of_topics,
             'topics': list(self.topics),
+            'author': self.author.toJSON(),
             'users': [user.toJSON() for user in self.users]
         }
 

@@ -83,6 +83,7 @@ async def create_gathering(ctx):
             data['number_of_topics'] = number_of_topics
         await ctx.send(f'Select topics:')
         data['topics'] = await bot.select_topics(ctx, number_of_topics)
+        data['author'] = {'name': ctx.author.name, 'id': ctx.author.id}
         data['users'] = [{'name': ctx.author.name, 'id': ctx.author.id}]
         gathering = Gathering(data)
         await ctx.send('Circle Created! Type "!list" to view all Circles:')
