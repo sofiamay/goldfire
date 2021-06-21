@@ -137,48 +137,43 @@ async def delete_gathering(ctx):
             return True
         else:
             return False
-    try:
-        if not db['gatherings']:
-            await ctx.send('No Gatherings')
-            return
-        gatherings = []
-        for gathering_data in db['gatherings']:
-            gathering = Gathering(gathering_data)
-            if gathering.author.id == ctx.author.id:
-                gatherings.append(gathering)
-        if not gatherings:
-            await ctx.send('You did not create any gatherings')
-            return
-        # Author created only 1 gathering:
-        if len(gatherings) == 1:
-            selected_gathering = gatherings[0]
-        # Author created multiple gatherings
-        else:
-            await ctx.send(
-                '**Select the Index of the Circle to delete:**\n{0}'
-                .format(bot.pprint_gatherings(gatherings))
-            )
-            msg = await bot.wait_for('message', check=check)
-            index = util.str_to_int(msg.content)
-            if (index > len(gatherings) - 1) or index < 0:
-                raise ValueError('Number is out of range')
-            selected_gathering = gatherings[index]
-        # Delete Selected Gathering:
+    if not db['gatherings']:
+        await ctx.send('No Gatherings')
+        return
+    gatherings = []
+    for gathering_data in db['gatherings']:
+        gathering = Gathering(gathering_data)
+        if gathering.author.id == ctx.author.id:
+            gatherings.append(gathering)
+    if not gatherings:
+        await ctx.send('You did not create any gatherings')
+        return
+    # Author created only 1 gathering:
+    if len(gatherings) == 1:
+        selected_gathering = gatherings[0]
+    # Author created multiple gatherings
+    else:
         await ctx.send(
-            '**Do you wish to delete this gathering? Type y or n**\n{0}'
-            .format(selected_gathering.toString())
+            '**Select the Index of the Circle to delete:**\n{0}'
+            .format(bot.pprint_gatherings(gatherings))
         )
         msg = await bot.wait_for('message', check=check)
-        if msg.content not in ['y', 'n']:
-            raise ValueError('Type y or n only')
-        if msg.content == 'y':
-            db['gatherings'].remove(selected_gathering.toJSON())
-            await ctx.send('Circle Deleted')
-            return
-    except (ValueError, IndexError) as e:
-        await ctx.send(f'Error: {str(e)}')
-    except Exception as e:
-        print(e)
+        index = util.str_to_int(msg.content)
+        if (index > len(gatherings) - 1) or index < 0:
+            raise ValueError('Number is out of range')
+        selected_gathering = gatherings[index]
+    # Delete Selected Gathering:
+    await ctx.send(
+        '**Do you wish to delete this gathering? Type y or n**\n{0}'
+        .format(selected_gathering.toString())
+    )
+    msg = await bot.wait_for('message', check=check)
+    if msg.content not in ['y', 'n']:
+        raise ValueError('Type y or n only')
+    if msg.content == 'y':
+        db['gatherings'].remove(selected_gathering.toJSON())
+        await ctx.send('Circle Deleted')
+        return
 
 
 # Delete all messages that don't start with '!'
