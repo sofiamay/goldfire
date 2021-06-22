@@ -195,5 +195,4 @@ async def on_message(message):
         await message.delete()
     await bot.process_commands(message)
 
-
 bot.run(TOKEN)
