@@ -25,5 +25,6 @@ class DataHandler(commands.Cog):
 
     @tasks.loop(hours=5.0)
     async def save_data(self):
+        data = [dict(gathering) for gathering in list(db['gatherings'])]
         with open(self.backup, 'w') as file:
-            json.dump(db['gatherings'], file)
+            json.dump(data, file)
