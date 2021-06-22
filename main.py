@@ -97,7 +97,7 @@ async def create_gathering(ctx):
         time.sleep(2)
         await ctx.invoke(bot.get_command('clear'))
     except (ValueError, IndexError) as e:
-        await ctx.send(f'Error: {str(e)}')
+        await ctx.send(f'Error: {str(e)}\nEXITING COMMAND')
 
 
 @bot.command(name='join', help='Join an open circle')
@@ -127,7 +127,7 @@ async def join_gathering(ctx):
             gathering.users.append(user)
         await ctx.send(f'**You have joined: {gathering.name}**')
     except (ValueError, IndexError) as e:
-        await ctx.send(f'Error: {str(e)}')
+        await ctx.send(f'Error: {str(e)}\nEXITING COMMAND')
 
 
 @bot.command(name='delete', help='Delete one of your Circles')
@@ -178,7 +178,7 @@ async def delete_gathering(ctx):
             time.sleep(2)
             await ctx.invoke(bot.get_command('clear'))
     except (ValueError, IndexError) as e:
-        await ctx.send(f'Error: {str(e)}')
+        await ctx.send(f'Error: {str(e)}\nEXITING COMMAND')
 
 
 # Delete all messages that don't start with '!'
