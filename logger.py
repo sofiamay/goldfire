@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 def get_logger():
     log_path = 'err.log'
     logger = logging.getLogger("Error Log")
-    logger.setLevel(logging.ERROR)
+    logger.setLevel(logging.INFO)
     handler = RotatingFileHandler(
         log_path, maxBytes=10000, backupCount=5
     )
@@ -15,3 +15,4 @@ def get_logger():
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     return logger
+

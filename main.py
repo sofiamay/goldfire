@@ -25,11 +25,6 @@ if 'gatherings' not in db:
     db['gatherings'] = []
 
 
-@bot.event
-async def on_ready():
-    print(f'{bot.user.name} has connected to Discord!')
-
-
 @bot.command(name='list', help='Lists all Circles')
 async def list_gatherings(ctx):
     try:
