@@ -1,9 +1,7 @@
 import discord
 import traceback
-import os
 from discord.ext import commands
-import logging
-from logging.handlers import RotatingFileHandler
+from logger import get_logger
 
 class CommandErrorHandler(commands.Cog):
 
@@ -59,18 +57,7 @@ class CommandErrorHandler(commands.Cog):
         else:
             # All other Errors not returned come here.
             # And we can just print the default TraceBack.
-            cur_path = os.path.dirname(__file__)
-            log_path = os.path.relpath('..\\err.log', cur_path)
-            logger = logging.getLogger("Rotating Log")
-            logger.setLevel(logging.ERROR)
-            handler = RotatingFileHandler(
-                log_path, maxBytes=10000, backupCount=5
-            )
-            formatter = logging.Formatter(
-                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            )
-            handler.setFormatter(formatter)
-            logger.addHandler(handler)
+            logger = get_logger()
             err_string = ''.join(
                 traceback.format_exception(
                     type(error), error, error.__traceback__

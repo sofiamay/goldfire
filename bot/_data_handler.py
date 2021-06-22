@@ -2,11 +2,13 @@ from discord.ext import tasks, commands
 from replit import db
 import os
 import json
+from logger import get_logger
 
 class DataHandler(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.logger = get_logger()
         cur_path = os.path.dirname(__file__)
         self.backup = os.path.relpath('..\\backup.json', cur_path)
         self.save_data.start()
@@ -17,6 +19,7 @@ class DataHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print(f'{self.bot.user.name} has connected to Discord!')
+        self.logger.info(f'{self.bot.user.name} has connected to Discord!')
 
         # Load database from backup
         if 'gatherings' not in db:
