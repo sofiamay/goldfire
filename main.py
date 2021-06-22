@@ -1,13 +1,14 @@
+# Python Libraries:
 import os
 import time
 from replit import db
 import discord
+# Modules:
+import util
+import server
 
 # Models
 from models import Gathering, User
-
-# Util
-import util
 
 # Bot
 from bot import scheduling_bot as bot
@@ -195,4 +196,5 @@ async def on_message(message):
         await message.delete()
     await bot.process_commands(message)
 
+server.keep_alive()
 bot.run(TOKEN)
