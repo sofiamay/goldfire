@@ -4,6 +4,8 @@ from replit import db
 
 
 class TasksCog(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
     @tasks.loop(minutes=5.0)
     async def cleanup(self):

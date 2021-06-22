@@ -75,5 +75,5 @@ class Bot(commands.Bot):
 
 # Export:
 scheduling_bot = Bot()
-scheduling_bot.add_cog(_tasks.TasksCog())
-scheduling_bot.add_cog(_error_handler.CommandErrorHandler())
+scheduling_bot.add_cog(_tasks.TasksCog(scheduling_bot))
+scheduling_bot.add_cog(_error_handler.CommandErrorHandler(scheduling_bot))
