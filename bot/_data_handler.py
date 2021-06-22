@@ -30,7 +30,8 @@ class DataHandler(commands.Cog):
         for gathering in gatherings:
             gathering_data = dict(gathering)
             gathering_data['topics'] = list(gathering['topics'])
-            gathering_data['users'] = list(gathering['users'])
+            users_data = [dict(user) for user in list(gathering['users'])]
+            gathering_data['users'] = users_data
             data.append(gathering_data)
 
         with open(self.backup, 'w') as file:
