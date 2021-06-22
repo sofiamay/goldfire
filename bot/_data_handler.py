@@ -3,7 +3,7 @@ from replit import db
 import os
 import json
 
-class CommandErrorHandler(commands.Cog):
+class DataHandler(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
